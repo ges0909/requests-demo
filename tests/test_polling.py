@@ -9,7 +9,7 @@ log = logging.getLogger("urllib3")
 log.setLevel(logging.DEBUG)
 
 
-def _is_success(response) -> bool:
+def _is_successful(response) -> bool:
     """Custom condition.
 
     Gets the  the return value of the poll function.
@@ -29,7 +29,7 @@ def test_polling_basics():
         step=0.5,  # time to wait between function calls in seconds
         poll_forever=True,  # retry until success or an exception occurred
     )
-    "'poll' returns first value of polling funtion"
+    # 'poll' returns first value of polling function
     assert response.reason == "OK"
 
 
@@ -57,7 +57,7 @@ def test_polling_custom_condition():
         kwargs={
             "url": "http://google.com",
         },  # keyword args to be passed to function
-        check_success=_is_success,
+        check_success=_is_successful,
         step=0.5,
         poll_forever=True,
     )
