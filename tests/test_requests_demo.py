@@ -3,9 +3,11 @@ import requests
 
 def test_random_user_generator():
     headers = {"X-Request-Id": "<my-request-id>"}  # custom headers 'X-...'
+    queries = {"limit": 1}
     response = requests.get(
         "https://randomuser.me/api/",
         headers=headers,
+        params=queries,
     )
 
     request = response.request
@@ -22,14 +24,19 @@ def test_random_user_generator():
 
     assert response.status_code == 200
     assert response.reason == "OK"
-    # assert response.headers == {}
     assert response.headers.get("Content-Type") == "application/json; charset=utf-8"
 
-    # content = response = response.text  # returns the response contents in unicode format
-    # content = response = response.content  # returns the response contents in bytes
-    dict_ = response = response.json()  # converts byte response in python dict
+    # content = response.text  # returns the response contents in unicode format
+    # content = response.content  # returns the response contents in bytes
+    content = response.json()  # converts byte response in python dict
 
     pass
+
+
+def test_requests_proxies():
+    proxies = {"https": "https://10.9.4.236:3128", "http": "http://10.9.4.236:3128"}
+    response = requests.get("https://randomuser.me/api/", proxies=proxies)
+    assert response.status_code == 200
 
 
 def test_read_bytes_and_save_as_local_file():
