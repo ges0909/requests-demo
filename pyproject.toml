@@ -7,7 +7,7 @@ authors = ["Gerrit Schrader <gerrit.schrader@gmail.com>"]
 [tool.poetry.dependencies]
 python = "^3.9"
 requests = "^2.25.1"
-polling = "^0.3.1"
+polling2 = "^0.4.6"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.2"

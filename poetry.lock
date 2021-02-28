@@ -137,9 +137,9 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 dev = ["pre-commit", "tox"]
 
 [[package]]
-name = "polling"
-version = "0.3.1"
-description = "Powerful polling utility with many configurable options"
+name = "polling2"
+version = "0.4.6"
+description = "Updated polling utility with many configurable options"
 category = "main"
 optional = false
 python-versions = "*"
@@ -247,7 +247,7 @@ socks = ["PySocks (>=1.5.6,!=1.5.7,<2.0)"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "5889b40f5d6495fb1649a2f13fc71ecce12ea0e36de56d13bec904b990710aac"
+content-hash = "37ea0366074c072e9d23429dfa5092766a3a0eac4c4caad6c4a84ecb72b99fd7"
 
 [metadata.files]
 appdirs = [
@@ -306,9 +306,9 @@ pluggy = [
     {file = "pluggy-0.13.1-py2.py3-none-any.whl", hash = "sha256:966c145cd83c96502c3c3868f50408687b38434af77734af1e9ca461a4081d2d"},
     {file = "pluggy-0.13.1.tar.gz", hash = "sha256:15b2acde666561e1298d71b523007ed7364de07029219b604cf808bfa1c765b0"},
 ]
-polling = [
-    {file = "polling-0.3.1-py3-none-any.whl", hash = "sha256:6b187150ae9d240cfde3af4ae9e90219db9cdd19bf92229c59607ce8e9a072aa"},
-    {file = "polling-0.3.1.tar.gz", hash = "sha256:fafdd9aeeb2d24f02cbd575ff1d99c822cb629e975b183eda6927d696c3abcf7"},
+polling2 = [
+    {file = "polling2-0.4.6-py2.py3-none-any.whl", hash = "sha256:003facc3b47ac1e03847610c484409315bc2b2496ff48d0f05114e833cc27a5f"},
+    {file = "polling2-0.4.6.tar.gz", hash = "sha256:6fd676640c4575b3d94888b34086cf64ad2ce6b3314107ecd42add2be8224fe0"},
 ]
 py = [
     {file = "py-1.10.0-py2.py3-none-any.whl", hash = "sha256:3b80836aa6d1feeaa108e046da6423ab8f6ceda6468545ae8d02d9d58d18818a"},
