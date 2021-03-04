@@ -1,7 +1,7 @@
 import logging
 import queue
 
-import polling
+import polling2
 import pytest
 import requests
 
@@ -24,7 +24,7 @@ def _custom_step(step: float) -> float:
 
 
 def test_polling_basics():
-    response = polling.poll(
+    response = polling2.poll(
         target=lambda: requests.get("http://google.com"),
         step=0.5,  # time to wait between function calls in seconds
         poll_forever=True,  # retry until success or an exception occurred
@@ -34,8 +34,8 @@ def test_polling_basics():
 
 
 def test_polling_raise_timeout_exception():
-    with pytest.raises(polling.TimeoutException):
-        polling.poll(
+    with pytest.raises(polling2.TimeoutException):
+        polling2.poll(
             target=lambda: requests.get("http://google.com").status_code == 400,
             step=0.5,
             timeout=1,  # total time in seconds
@@ -43,8 +43,8 @@ def test_polling_raise_timeout_exception():
 
 
 def test_polling_raise_max_call_exception():
-    with pytest.raises(polling.MaxCallException):
-        polling.poll(
+    with pytest.raises(polling2.MaxCallException):
+        polling2.poll(
             target=lambda: requests.get("http://google.com").status_code == 400,
             step=0.5,
             max_tries=3,  # maximum number of retries
@@ -52,7 +52,7 @@ def test_polling_raise_max_call_exception():
 
 
 def test_polling_custom_condition():
-    polling.poll(
+    polling2.poll(
         target=lambda url: requests.get(url),
         kwargs={
             "url": "http://google.com",
@@ -63,10 +63,10 @@ def test_polling_custom_condition():
     )
 
 
-def test_polling_custom_step():
+def test_polling_custom_interval():
     """to test set '--log-cli-level DEBUG' on cmd. line"""
-    with pytest.raises(polling.MaxCallException):
-        polling.poll(
+    with pytest.raises(polling2.MaxCallException):
+        polling2.poll(
             target=lambda: requests.get("http://google.com").status_code == 400,
             step_function=_custom_step,  # adds 0.5 seconds to each iteration
             # step_function=polling.step_constant, #  returns step
@@ -77,8 +77,8 @@ def test_polling_custom_step():
 
 
 def test_polling_ignore_exceptions():
-    with pytest.raises(polling.MaxCallException):
-        response = polling.poll(
+    with pytest.raises(polling2.MaxCallException):
+        response = polling2.poll(
             target=lambda: requests.get("INVALID_SCHEMA://google.com").status_code == 400,
             ignore_exceptions=(requests.exceptions.InvalidSchema,),
             step=0.5,
@@ -89,8 +89,8 @@ def test_polling_ignore_exceptions():
 
 def test_polling_collect_values():
     queue_ = queue.Queue()
-    with pytest.raises(polling.MaxCallException):
-        polling.poll(
+    with pytest.raises(polling2.MaxCallException):
+        polling2.poll(
             target=lambda: requests.get("http://google.com").status_code == 400,
             collect_values=queue_,
             step=0.5,
@@ -100,7 +100,7 @@ def test_polling_collect_values():
 
 
 def _poll(run, *args, **kwargs):
-    return polling.poll(
+    return polling2.poll(
         target=lambda: run(*args, **kwargs),
         step=0.5,
         poll_forever=True,
